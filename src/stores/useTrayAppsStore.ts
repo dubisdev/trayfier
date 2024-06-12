@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { TrayApp } from "../features/TrayApp/domain/TrayApp";
-import { showTrayApp } from "../features/TrayApp/application/showTrayApp";
-import { TauriTrayAppVisibilityManager } from "../features/TrayApp/infrastructure/TauriTrayAppDisplayer";
-import { hideTrayApp } from "../features/TrayApp/application/hideTrayApp";
+import { TrayApp } from "../modules/TrayApp/domain/TrayApp";
+import { showTrayApp } from "../modules/TrayApp/application/showTrayApp";
+import { TauriTrayAppVisibilityManager } from "../modules/TrayApp/infrastructure/TauriTrayAppDisplayer";
+import { hideTrayApp } from "../modules/TrayApp/application/hideTrayApp";
 import { TrayAppParams, createTrayApp } from "../services/createTrayApp";
 
 type TrayAppStore = {

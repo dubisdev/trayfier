@@ -1,4 +1,4 @@
-import { TrayApp } from "../features/TrayApp/domain/TrayApp"
+import { TrayApp } from "../modules/TrayApp/domain/TrayApp"
 import { useTrayAppsStore } from "../stores/useTrayAppsStore"
 
 type TrayAppInfoProps = {
@@ -8,13 +8,13 @@ type TrayAppInfoProps = {
 export const TrayAppInfo = ({ trayApp }: TrayAppInfoProps) => {
     const { deleteTrayApp } = useTrayAppsStore()
 
-    const handleDeleteTrayApp = async (trayAppId: TrayApp) => {
-        deleteTrayApp(trayAppId)
+    const handleDeleteTrayApp = () => {
+        deleteTrayApp(trayApp)
     }
 
     return <div>
         <img src={trayApp.icon} alt={trayApp.name} />
         <span>{trayApp.name}</span>
-        <button onClick={() => handleDeleteTrayApp(trayApp)}>Delete</button>
+        <button onClick={handleDeleteTrayApp}>Delete</button>
     </div>
 }

@@ -1,4 +1,4 @@
-import { TrayApp } from "../features/TrayApp/domain/TrayApp";
+import { TrayApp } from "../modules/TrayApp/domain/TrayApp";
 
 export interface TrayAppParams {
     name: string;
