@@ -9,10 +9,14 @@
     "path:default",
     "event:default",
     "window:default",
+    "webview:default",
     "app:default",
     "image:default",
     "resources:default",
     "menu:default",
-    "tray:default"
+    "tray:default",
+    "tray:allow-new",
+    "tray:allow-remove-by-id",
+    "tray:allow-get-by-id"
   ]
 }
