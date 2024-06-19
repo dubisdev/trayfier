@@ -14,8 +14,6 @@ export class TauriTrayAppVisibilityManager implements TrayAppVisibilityManager {
     async hide(trayApp: TrayApp) {
         const tray = await TrayIcon.getById(trayApp.id)
 
-        console.log(tray)
-
         if (!tray) return
 
         await tray.close().then(console.log).catch(console.error)
