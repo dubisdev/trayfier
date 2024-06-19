@@ -17,6 +17,7 @@
     "tray:default",
     "tray:allow-new",
     "tray:allow-remove-by-id",
-    "tray:allow-get-by-id"
+    "tray:allow-get-by-id",
+    "dialog:default"
   ]
 }
