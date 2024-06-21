@@ -15,7 +15,7 @@ export const CreateTrayAppForm = () => {
 
         if (typeof name !== "string") return
 
-        addTrayApp({ name })
+        addTrayApp({ name, icon: "./icons/icon.png" })
     }
 
     return <form onSubmit={handleCreateTrayApp}>
