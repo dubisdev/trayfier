@@ -1,8 +1,7 @@
 import { AppImage } from "../domain/AppImage";
 import { AppImageRepository } from "../domain/AppImageRepository";
-import { appConfigDir } from "@tauri-apps/api/path"
-import { open } from "@tauri-apps/plugin-dialog"
-import { } from "@tauri-apps/api/"
+import { appConfigDir, BaseDirectory, join } from "@tauri-apps/api/path"
+import { copyFile, mkdir, readFile, remove } from "@tauri-apps/plugin-fs"
 
 const APP_FILES_DIR = await appConfigDir();
 
@@ -11,22 +10,38 @@ export class TauriAppImageRepository implements AppImageRepository {
 
     // TODO implement
     async save(appImage: AppImage): Promise<void> {
-        const selected = await open({ filters: [{ name: "*", extensions: ["png"] }] })
+        console.log('Saving image', appImage.path, 'to', this.appDataPath);
 
-        if (!selected) return
+        await mkdir(this.appDataPath, { recursive: true })
 
-        console.log('Saving image', selected.path, 'to', this.appDataPath);
+        await copyFile(appImage.path, appImage.name, { toPathBaseDir: BaseDirectory.AppConfig })
+
+        console.log('Image saved');
     }
 
-    // TODO implement
-    async getById(id: string): Promise<AppImage | null> {
-        console.log('Finding image', id, 'in', this.appDataPath);
+    async getByName(name: string): Promise<AppImage | null> {
+        console.log('Finding image', name, 'in', this.appDataPath);
+
+        const image = await readFile(name, { baseDir: BaseDirectory.AppConfig })
+
+        if (image) {
+            const appImage = AppImage.create({
+                id: crypto.randomUUID(),
+                name,
+                path: await join(this.appDataPath, name)
+            })
+
+            return appImage
+        }
+
         return null;
     }
 
     // TODO implement
-    async remove(id: string): Promise<void> {
+    async remove(name: string): Promise<void> {
         // in this case the id is the path of the image
-        console.log('Removing image', id, 'from', this.appDataPath);
+        console.log('Removing image', name, 'from', this.appDataPath);
+
+        await remove(name, { baseDir: BaseDirectory.AppConfig })
     }
 }

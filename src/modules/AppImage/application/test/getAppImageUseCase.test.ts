@@ -8,21 +8,21 @@ describe("getAppImageUseCase", () => {
         vi.clearAllMocks()
     })
 
-    const mockAppImage = AppImage.create({ id: "1", path: "test/path" })
+    const mockAppImage = AppImage.create({ id: "1", path: "test/path", name: "test.png" })
 
     const mockAppImageRepository: AppImageRepository = {
         save: vi.fn(),
         remove: vi.fn(),
-        getById: vi.fn().mockImplementation((id: string) => {
+        getByName: vi.fn().mockImplementation((id: string) => {
             if (id === "1") return mockAppImage
             return null
         })
     }
 
-    it("should call the repository getById method with the correspondent id", async () => {
+    it("should call the repository getByName method with the correspondent id", async () => {
         await getAppImageUseCase("1", mockAppImageRepository)
 
-        expect(mockAppImageRepository.getById).toHaveBeenCalledWith("1")
+        expect(mockAppImageRepository.getByName).toHaveBeenCalledWith("1")
     })
 
     it("should return the app image if exists", async () => {

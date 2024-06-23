@@ -14,11 +14,26 @@
     "image:default",
     "resources:default",
     "menu:default",
-    "tray:default",
     "tray:allow-new",
     "tray:allow-remove-by-id",
     "tray:allow-get-by-id",
+    "tray:allow-set-visible",
     "dialog:default",
-    "dialog:allow-open"
+    "dialog:allow-open",
+    "fs:allow-read",
+    "fs:allow-copy-file",
+    "fs:allow-remove",
+    "fs:allow-appconfig-write-recursive",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "$APPDATA"
+        },
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    }
   ]
 }

@@ -1,16 +1,16 @@
-import { useTrayAppsStore } from "./stores/useTrayAppsStore";
-import { CreateTrayAppForm } from "./components/CreateTrayAppForm";
-import { TrayAppInfo } from "./components/TrayAppInfo";
+import { EuiProvider } from "@elastic/eui"
+import '@elastic/eui/dist/eui_theme_light.css';
+
+import { useThemeStore } from "./stores/useThemeStore";
+import { Home } from "./routes/Home";
 
 function App() {
-  const { trayApps } = useTrayAppsStore()
+  const theme = useThemeStore(s => s.theme)
 
   return <>
-    <h1>Add a Tray icon to your Tray</h1>
-
-    <CreateTrayAppForm />
-
-    {trayApps.map((trayApp) => <TrayAppInfo key={trayApp.id} trayApp={trayApp} />)}
+    <EuiProvider colorMode={theme}>
+      <Home />
+    </EuiProvider>
   </>
 }
 

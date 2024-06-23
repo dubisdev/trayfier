@@ -8,7 +8,7 @@ describe("removeAppImageUseCase", () => {
         vi.clearAllMocks()
     })
 
-    const mockAppImage = AppImage.create({ id: "1", path: "test/path" })
+    const mockAppImage = AppImage.create({ id: "1", path: "test/path", name: "test.png" })
 
     const mockAppImageRepository: AppImageRepository = {
         save: vi.fn(),
@@ -16,7 +16,7 @@ describe("removeAppImageUseCase", () => {
             if (id === "1") return mockAppImage
             return null
         }),
-        getById: vi.fn()
+        getByName: vi.fn()
     }
 
     it("should call the repository remove method with the correspondent id", async () => {

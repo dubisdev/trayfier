@@ -1,5 +1,7 @@
+import { convertFileSrc } from "@tauri-apps/api/core"
 import { TrayApp } from "../modules/TrayApp/domain/TrayApp"
 import { useTrayAppsStore } from "../stores/useTrayAppsStore"
+import { EuiButton, EuiCard, EuiIcon } from "@elastic/eui"
 
 type TrayAppInfoProps = {
     trayApp: TrayApp
@@ -12,9 +14,18 @@ export const TrayAppInfo = ({ trayApp }: TrayAppInfoProps) => {
         deleteTrayApp(trayApp)
     }
 
-    return <div>
-        <img src={trayApp.icon} alt={trayApp.name} />
-        <span>{trayApp.name}</span>
-        <button onClick={handleDeleteTrayApp}>Delete</button>
-    </div>
+    return <EuiCard
+        title={trayApp.name}
+        icon={<EuiIcon type={convertFileSrc(trayApp.appImage.path)} />}
+        footer={
+            <EuiButton onClick={handleDeleteTrayApp}>
+                Delete
+            </EuiButton>
+        }
+
+    />
+
+
+
+
 }

@@ -8,7 +8,7 @@ describe("saveAppImageUseCase", () => {
         vi.clearAllMocks()
     })
 
-    const mockAppImage = AppImage.create({ id: "1", path: "test/path" })
+    const mockAppImage = AppImage.create({ id: "1", path: "test/path", name: "test.png" })
 
     const mockAppImageRepository: AppImageRepository = {
         save: vi.fn().mockImplementation((id: string) => {
@@ -16,7 +16,7 @@ describe("saveAppImageUseCase", () => {
             return null
         }),
         remove: vi.fn(),
-        getById: vi.fn()
+        getByName: vi.fn()
     }
 
     it("should call the repository save method with the correspondent id", async () => {
