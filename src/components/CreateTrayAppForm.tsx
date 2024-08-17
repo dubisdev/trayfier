@@ -3,7 +3,7 @@ import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { open } from "@tauri-apps/plugin-dialog";
 import { AppImage } from "../modules/AppImage/domain/AppImage";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { EuiButton, EuiFieldText, EuiForm, EuiFormRow, EuiIcon, EuiPanel } from "@elastic/eui";
+import { Icon } from "../modules/TrayApp/components/Icon";
 
 export const CreateTrayAppForm = () => {
     const { addTrayApp } = useTrayAppsStore()
@@ -40,22 +40,12 @@ export const CreateTrayAppForm = () => {
         addTrayApp({ name }, appImage)
     }
 
-    return <EuiPanel color="accent">
-        <EuiForm component="form" onSubmit={(e) => handleCreateTrayApp(e, appImage)}>
-            <EuiFormRow label="Name">
-                <EuiFieldText name="trayAppName" />
-            </EuiFormRow>
-            <EuiFormRow label="App Icon">
-                <>
-                    <EuiButton onClick={handleSelectImage}>Select App Icon</EuiButton>
-                    {appImage && <EuiIcon size="xxl" type={convertFileSrc(appImage.path)} />}
-                </>
-            </EuiFormRow>
+    return <form onSubmit={(e) => handleCreateTrayApp(e, appImage)}>
+        <input name="trayAppName" />
+        <button onClick={handleSelectImage}>Select App Icon</button>
+        {appImage && <Icon src={convertFileSrc(appImage.path)} altName={appImage.name} />}
 
-            <EuiButton type="submit">Add Tray App</EuiButton>
-        </EuiForm>
-    </EuiPanel>
+        <button type="submit">Add Tray App</button>
 
-
-
+    </form>
 }

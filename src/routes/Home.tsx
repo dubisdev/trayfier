@@ -1,7 +1,7 @@
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiModal, EuiText } from "@elastic/eui";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { CreateTrayAppForm } from "../components/CreateTrayAppForm";
-import { TrayAppInfo } from "../components/TrayAppInfo";
 import { LayoutBase } from "../layouts/LayoutBase"
+import { TrayAppInfo } from "../modules/TrayApp/components/TrayAppInfo";
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { useState } from "react";
 
@@ -10,24 +10,25 @@ export const Home = () => {
     const { trayApps } = useTrayAppsStore()
 
     return <LayoutBase>
-        <EuiText>
-            <h1>TrayFier</h1>
-        </EuiText>
-        <EuiButton onClick={() => setOpenModal(!openModal)}>Create Tray App</EuiButton>
+
+        <h1>TrayFier</h1>
+        <button onClick={() => setOpenModal(!openModal)}>Create Tray App</button>
+
 
         {
             openModal && <CreateTrayAppForm />
         }
 
-        <EuiFlexGroup>
+        <ul style={{ padding: 0 }}>
             {
                 trayApps.map((trayApp) =>
-                    <EuiFlexItem key={trayApp.id} grow={false}>
-                        <TrayAppInfo trayApp={trayApp} />
-                    </EuiFlexItem>
+                    <li key={trayApp.id} style={{ listStyle: "none", margin: "10px 0" }}>
+                        <TrayAppInfo appName={trayApp.name} iconSrc={convertFileSrc(trayApp.appImage.path)} />
+
+                    </li>
                 )
             }
-        </EuiFlexGroup>
+        </ul>
 
     </LayoutBase>
 }
