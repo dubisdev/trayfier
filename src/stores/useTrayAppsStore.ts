@@ -35,9 +35,7 @@ export const useTrayAppsStore = create<TrayAppStore>()(
         onRehydrateStorage: () => (state) => {
             if (!state) return
 
-            console.log("rehydrated", state)
             state.trayApps.forEach((app) => {
-                console.log("rehydrating...", app)
                 showTrayApp(app, tauriTrayAppVisibilityManager)
             })
         }
