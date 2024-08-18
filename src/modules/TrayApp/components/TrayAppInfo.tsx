@@ -1,11 +1,17 @@
+import { convertFileSrc } from "@tauri-apps/api/core"
+import { useTrayAppsStore } from "../../../stores/useTrayAppsStore"
+import { TrayApp } from "../domain/TrayApp"
 import { Icon } from "./Icon"
 
-type TrayAppInfoProps = {
-    iconSrc: string
-    appName: string
-}
+export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
+    const { name, iconSrc } = app
 
-export const TrayAppInfo = ({ appName, iconSrc }: TrayAppInfoProps) => {
+    const deleteTrayApp = useTrayAppsStore(s => s.deleteTrayApp)
+
+    const handleDeleteTrayApp = () => {
+        deleteTrayApp(app)
+    }
+
     return <div style={{
         display: "flex",
         padding: "10px",
@@ -13,10 +19,10 @@ export const TrayAppInfo = ({ appName, iconSrc }: TrayAppInfoProps) => {
         border: "1px solid black",
         borderRadius: "5px",
     }}>
-        <Icon src={iconSrc} altName={appName} />
+        <Icon src={convertFileSrc(iconSrc)} altName={name} />
 
-        <span>{appName}</span>
+        <span>{name}</span>
 
-        <button>Delete</button>
+        <button onClick={handleDeleteTrayApp}>Delete</button>
     </div>
 }

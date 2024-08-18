@@ -1,4 +1,3 @@
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { CreateTrayAppForm } from "../components/CreateTrayAppForm";
 import { LayoutBase } from "../layouts/LayoutBase"
 import { TrayAppInfo } from "../modules/TrayApp/components/TrayAppInfo";
@@ -14,17 +13,13 @@ export const Home = () => {
         <h1>TrayFier</h1>
         <button onClick={() => setOpenModal(!openModal)}>Create Tray App</button>
 
-
-        {
-            openModal && <CreateTrayAppForm />
-        }
+        {openModal && <CreateTrayAppForm />}
 
         <ul style={{ padding: 0 }}>
             {
                 trayApps.map((trayApp) =>
                     <li key={trayApp.id} style={{ listStyle: "none", margin: "10px 0" }}>
-                        <TrayAppInfo appName={trayApp.name} iconSrc={convertFileSrc(trayApp.appImage.path)} />
-
+                        <TrayAppInfo app={trayApp} />
                     </li>
                 )
             }

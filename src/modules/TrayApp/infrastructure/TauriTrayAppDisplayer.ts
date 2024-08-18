@@ -4,10 +4,14 @@ import { TrayAppVisibilityManager } from "../domain/TrayAppVisibilityManager";
 
 export class TauriTrayAppVisibilityManager implements TrayAppVisibilityManager {
     async show(trayApp: TrayApp) {
+        const tray = await TrayIcon.getById(trayApp.id)
+
+        if (tray) await this.hide(trayApp)
+
         await TrayIcon.new({
-            icon: trayApp.appImage.path,
+            icon: trayApp.iconSrc,
             tooltip: trayApp.name,
-            id: trayApp.id,
+            id: trayApp.id
         })
     }
 

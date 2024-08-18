@@ -1,30 +1,23 @@
 import { FormEvent, useState } from "react";
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { open } from "@tauri-apps/plugin-dialog";
-import { AppImage } from "../modules/AppImage/domain/AppImage";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Icon } from "../modules/TrayApp/components/Icon";
 
 export const CreateTrayAppForm = () => {
     const { addTrayApp } = useTrayAppsStore()
 
-    const [appImage, setAppImage] = useState<AppImage | null>(null)
+    const [iconSrc, setIconSrc] = useState<string | null>(null)
 
     const handleSelectImage = async () => {
         const file = await open({ multiple: false, filters: [{ name: "*", extensions: ["png"] }] })
 
         if (!file || !file.name) return
 
-        const appImage = AppImage.create({
-            id: crypto.randomUUID(),
-            name: file.name,
-            path: file.path
-        })
-
-        setAppImage(appImage)
+        setIconSrc(file.path)
     }
 
-    const handleCreateTrayApp = async (e: FormEvent, appImage: AppImage | null) => {
+    const handleCreateTrayApp = async (e: FormEvent, iconSrc: string | null) => {
         e.preventDefault();
 
         const fields = new FormData(e.target as HTMLFormElement);
@@ -35,15 +28,15 @@ export const CreateTrayAppForm = () => {
 
         if (typeof name !== "string") return
 
-        if (!appImage) return
+        if (!iconSrc) return
 
-        addTrayApp({ name }, appImage)
+        addTrayApp({ name, iconSrc })
     }
 
-    return <form onSubmit={(e) => handleCreateTrayApp(e, appImage)}>
+    return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)}>
         <input name="trayAppName" />
         <button onClick={handleSelectImage}>Select App Icon</button>
-        {appImage && <Icon src={convertFileSrc(appImage.path)} altName={appImage.name} />}
+        {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
 
         <button type="submit">Add Tray App</button>
 
