@@ -12,7 +12,6 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@elastic/datemath": "5.0.3",
     "@tauri-apps/api": "next",
     "@tauri-apps/plugin-dialog": "latest",
     "@tauri-apps/plugin-fs": "latest",
