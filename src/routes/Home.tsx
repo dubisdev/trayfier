@@ -1,19 +1,16 @@
-import { CreateTrayAppForm } from "../components/CreateTrayAppForm";
+import { Link } from "wouter";
 import { LayoutBase } from "../layouts/LayoutBase"
 import { TrayAppInfo } from "../modules/TrayApp/components/TrayAppInfo";
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
-import { useState } from "react";
+import { Routes } from "./Routes";
 
 export const Home = () => {
-    const [openModal, setOpenModal] = useState(false)
     const { trayApps } = useTrayAppsStore()
 
     return <LayoutBase>
 
         <h1>TrayFier</h1>
-        <button onClick={() => setOpenModal(!openModal)}>Create Tray App</button>
-
-        {openModal && <CreateTrayAppForm />}
+        <Link href={Routes.CREATE_TRAY_APP}>Create Tray App</Link>
 
         <ul style={{ padding: 0 }}>
             {
