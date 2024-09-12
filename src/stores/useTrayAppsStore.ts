@@ -17,7 +17,10 @@ export const useTrayAppsStore = create<TrayAppStore>()(
             trayApps: [],
 
             addTrayApp: (trayInfo) => {
-                const trayApp = TrayApp.create({ ...trayInfo, id: crypto.randomUUID() })
+                const trayApp: TrayApp = {
+                    ...trayInfo,
+                    id: crypto.randomUUID()
+                }
 
                 set((state) => ({ trayApps: [...state.trayApps, trayApp] }))
 

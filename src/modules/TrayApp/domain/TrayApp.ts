@@ -1,11 +1,10 @@
-export class TrayApp {
-    private constructor(
-        readonly id: string,
-        readonly iconSrc: string,
-        readonly name: string,
-    ) { }
+import { TrayAppAction } from "../../TrayAppAction/TrayAppAction";
+import { TrayAppMenu } from "./TrayAppMenu";
 
-    static create({ id, iconSrc, name }: { id: string, iconSrc: string, name: string }) {
-        return new TrayApp(id, iconSrc, name);
-    }
+export type TrayApp = {
+    id: string,
+    iconSrc: string,
+    name: string,
+    action?: TrayAppAction,
+    menu?: TrayAppMenu
 }
