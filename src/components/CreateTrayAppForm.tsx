@@ -10,11 +10,9 @@ export const CreateTrayAppForm = () => {
     const [iconSrc, setIconSrc] = useState<string | null>(null)
 
     const handleSelectImage = async () => {
-        const file = await open({ multiple: false, filters: [{ name: "*", extensions: ["png"] }] })
+        const filePath = await open({ multiple: false, filters: [{ name: "*", extensions: ["png"] }] })
 
-        if (!file || !file.name) return
-
-        setIconSrc(file.path)
+        setIconSrc(filePath)
     }
 
     const handleCreateTrayApp = async (e: FormEvent, iconSrc: string | null) => {
