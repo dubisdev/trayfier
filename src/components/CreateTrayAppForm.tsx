@@ -5,7 +5,7 @@ import { convertFileSrc } from "@tauri-apps/api/core";
 import { Icon } from "../modules/TrayApp/components/Icon";
 
 export const CreateTrayAppForm = () => {
-    const { addTrayApp } = useTrayAppsStore()
+    const addTrayApp = useTrayAppsStore(s => s.addTrayApp)
 
     const [iconSrc, setIconSrc] = useState<string | null>(null)
 

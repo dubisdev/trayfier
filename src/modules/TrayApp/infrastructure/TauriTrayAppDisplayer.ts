@@ -19,10 +19,8 @@ export class TauriTrayAppVisibilityManager implements TrayAppVisibilityManager {
             icon: trayApp.iconSrc,
             tooltip: trayApp.name,
             action: (event) => {
-                if ("click" in event) {
-                    if (event.click.button_state === "Up") {
-                        trayApp.action && TauriTrayAppActionExecutor.execute(trayApp.action)
-                    }
+                if (event.type === "Click" && event.buttonState === "Up") {
+                    trayApp.action && TauriTrayAppActionExecutor.execute(trayApp.action)
                 }
             },
             id: trayApp.id,

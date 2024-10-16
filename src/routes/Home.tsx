@@ -5,7 +5,7 @@ import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { Routes } from "./Routes";
 
 export const Home = () => {
-    const { trayApps } = useTrayAppsStore()
+    const trayApps = useTrayAppsStore(s => s.trayApps)
 
     return <LayoutBase>
 
