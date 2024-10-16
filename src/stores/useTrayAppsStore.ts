@@ -9,12 +9,17 @@ type TrayAppStore = {
     trayApps: TrayApp[];
     addTrayApp: (trayAppPrimitives: { name: string, iconSrc: string }) => void;
     deleteTrayApp: (trayAppId: TrayApp) => void;
+    getById: (trayAppId: string) => TrayApp | undefined;
 }
 
 export const useTrayAppsStore = create<TrayAppStore>()(
-    persist(
-        (set) => ({
+    persist<TrayAppStore>(
+        (set, get) => ({
             trayApps: [],
+
+            getById: (trayAppId) => {
+                return get().trayApps.find(app => app.id === trayAppId)
+            },
 
             addTrayApp: (trayInfo) => {
                 const trayApp: TrayApp = {
