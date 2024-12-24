@@ -8,9 +8,7 @@ export const Home = () => {
     const trayApps = useTrayAppsStore(s => s.trayApps)
 
     return <LayoutBase>
-
         <h1>TrayFier</h1>
-        <Link href={Routes.CREATE_TRAY_APP}>Create Tray App</Link>
 
         <ul style={{ padding: 0 }}>
             {
@@ -22,5 +20,6 @@ export const Home = () => {
             }
         </ul>
 
+        <Link href={Routes.CREATE_TRAY_APP}>Create Tray App</Link>
     </LayoutBase>
 }

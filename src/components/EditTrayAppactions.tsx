@@ -34,7 +34,6 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
         if (typeof name !== "string") return
 
         const actionValue = fields.get("actionValue");
-        if (!actionValue) return
         if (typeof actionValue !== "string") return
 
         const action: TrayAppAction = {
