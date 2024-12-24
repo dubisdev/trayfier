@@ -6,6 +6,25 @@ use tauri::Manager;
 fn main() {
     let mut builder = tauri::Builder::default();
 
+    builder = builder.setup(|app| {
+        #[cfg(desktop)]
+        {
+            use tauri_plugin_autostart::MacosLauncher;
+            use tauri_plugin_autostart::ManagerExt;
+
+            let _ = app.handle().plugin(tauri_plugin_autostart::init(
+                MacosLauncher::LaunchAgent,
+                Some(vec![]),
+            ));
+
+            // Get the autostart manager
+            let autostart_manager = app.autolaunch();
+            // Enable autostart
+            let _ = autostart_manager.enable();
+        }
+        Ok(())
+    });
+
     #[cfg(desktop)]
     {
         builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
