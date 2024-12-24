@@ -17,7 +17,6 @@ export const Home = () => {
                 trayApps.map((trayApp) =>
                     <li key={trayApp.id} style={{ listStyle: "none", margin: "10px 0" }}>
                         <TrayAppInfo app={trayApp} />
-                        <Link href={Routes.EDIT_TRAY_APP.replace(":id", trayApp.id)}>Edit</Link>
                     </li>
                 )
             }
