@@ -50,7 +50,7 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
         onUpdated()
     }
 
-    return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)}>
+    return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)} autoComplete="off">
         <input name="trayAppName" defaultValue={trayApp.name} />
         <button onClick={handleSelectImage}>Select App Icon</button>
 

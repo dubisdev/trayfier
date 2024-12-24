@@ -37,7 +37,7 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
         props.onCreated()
     }
 
-    return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)}>
+    return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)} autoComplete="off">
         <input name="trayAppName" />
         <button onClick={handleSelectImage}>Select App Icon</button>
         {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
