@@ -7,9 +7,7 @@ import { Routes } from "./Routes";
 export const Home = () => {
     const trayApps = useTrayAppsStore(s => s.trayApps)
 
-    return <LayoutBase>
-        <h1>TrayFier</h1>
-
+    return <LayoutBase pageTitle="Your Apps">
         <ul style={{ padding: 0 }}>
             {
                 trayApps.map((trayApp) =>
