@@ -3,18 +3,22 @@ import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Icon } from "../modules/TrayApp/components/Icon";
+import { TrayApp } from "../modules/TrayApp/domain/TrayApp";
 
 interface CreateTrayAppFormProps {
-    onCreated: () => void
+    trayApp: TrayApp
+    onUpdated: () => void
 }
 
-export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
-    const addTrayApp = useTrayAppsStore(s => s.addTrayApp)
+export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps) => {
+    const updateTrayApp = useTrayAppsStore(s => s.updateTrayApp)
 
-    const [iconSrc, setIconSrc] = useState<string | null>(null)
+    const [iconSrc, setIconSrc] = useState<string>(trayApp.iconSrc)
 
     const handleSelectImage = async () => {
         const filePath = await open({ multiple: false, filters: [{ name: "*", extensions: ["png"] }] })
+
+        if (!filePath) return
 
         setIconSrc(filePath)
     }
@@ -32,17 +36,17 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
 
         if (!iconSrc) return
 
-        addTrayApp({ name, iconSrc })
+        updateTrayApp({ ...trayApp, name, iconSrc })
 
-        props.onCreated()
+        onUpdated()
     }
 
     return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)}>
-        <input name="trayAppName" />
+        <input name="trayAppName" defaultValue={trayApp.name} />
         <button onClick={handleSelectImage}>Select App Icon</button>
         {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
 
-        <button type="submit">Add Tray App</button>
+        <button type="submit">Update Tray App</button>
 
     </form>
 }

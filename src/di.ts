@@ -2,4 +2,4 @@ import { TauriTrayAppVisibilityManager } from "./modules/TrayApp/infrastructure/
 
 const tauriTrayAppVisibilityManager = new TauriTrayAppVisibilityManager()
 
-export { tauriTrayAppVisibilityManager }
+export { tauriTrayAppVisibilityManager as TrayAppVisibilityManager }

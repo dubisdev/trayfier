@@ -1,10 +1,14 @@
-import { Link, useParams, Redirect } from "wouter";
+import { Link, useParams, Redirect, useLocation } from "wouter";
 import { LayoutBase } from "../layouts/LayoutBase"
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { Routes } from "./Routes";
+import { UpdateTrayAppForm } from "../components/EditTrayAppActions";
 
 export const EditTrayApp = () => {
+    const [, navigate] = useLocation()
     const { id: trayAppId } = useParams<{ id: string }>()
+
+    const redirectToHome = () => navigate(Routes.HOME)
 
     const trayApp = useTrayAppsStore(s => s.getById(trayAppId))
 
@@ -14,6 +18,8 @@ export const EditTrayApp = () => {
 
         <h1>Editing {trayApp.name}</h1>
         <Link href={Routes.HOME}>Home</Link>
+
+        <UpdateTrayAppForm trayApp={trayApp} onUpdated={redirectToHome} />
 
     </LayoutBase>
 }
