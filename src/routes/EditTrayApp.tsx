@@ -15,11 +15,9 @@ export const EditTrayApp = () => {
     if (!trayApp) return <Redirect to={Routes.HOME} />
 
     return <LayoutBase>
-
         <h1>Editing {trayApp.name}</h1>
         <Link href={Routes.HOME}>Home</Link>
 
         <UpdateTrayAppForm trayApp={trayApp} onUpdated={redirectToHome} />
-
     </LayoutBase>
 }

@@ -1,4 +1,5 @@
 import { TrayAppAction, TrayAppActions } from "../TrayAppAction";
+import { open } from "@tauri-apps/plugin-shell";
 
 export const TauriTrayAppActionExecutor = {
     execute(action: TrayAppAction) {
@@ -13,10 +14,10 @@ export const TauriTrayAppActionExecutor = {
     },
 
     openUrl: (url: string) => {
-        window.open(url);
+        open(url);
     },
 
     openPath: (path: string) => {
-        window.open(path);
+        open(path);
     }
 }

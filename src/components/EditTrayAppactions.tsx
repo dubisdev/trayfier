@@ -4,6 +4,7 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Icon } from "../modules/TrayApp/components/Icon";
 import { TrayApp } from "../modules/TrayApp/domain/TrayApp";
+import { TrayAppAction, TrayAppActions } from "../modules/TrayAppAction/TrayAppAction";
 
 interface CreateTrayAppFormProps {
     trayApp: TrayApp
@@ -29,14 +30,23 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
         const fields = new FormData(e.target as HTMLFormElement);
 
         const name = fields.get("trayAppName");
-
         if (!name) return
-
         if (typeof name !== "string") return
+
+        const actionValue = fields.get("actionValue");
+        if (!actionValue) return
+        if (typeof actionValue !== "string") return
+
+        const action: TrayAppAction = {
+            type: TrayAppActions.OPEN_PATH,
+            configuration: {
+                path: actionValue
+            }
+        }
 
         if (!iconSrc) return
 
-        updateTrayApp({ ...trayApp, name, iconSrc })
+        updateTrayApp({ ...trayApp, name, iconSrc, action })
 
         onUpdated()
     }
@@ -44,6 +54,10 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
     return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)}>
         <input name="trayAppName" defaultValue={trayApp.name} />
         <button onClick={handleSelectImage}>Select App Icon</button>
+
+        <label htmlFor="actionType">Action Type</label>
+        <input name="actionValue" defaultValue={trayApp.action?.configuration.path} />
+
         {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
 
         <button type="submit">Update Tray App</button>

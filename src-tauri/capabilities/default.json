@@ -24,6 +24,7 @@
     "fs:allow-copy-file",
     "fs:allow-remove",
     "fs:allow-appconfig-write-recursive",
+    "shell:allow-open",
     {
       "identifier": "fs:scope",
       "allow": [
