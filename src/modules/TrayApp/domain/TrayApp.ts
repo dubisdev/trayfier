@@ -5,6 +5,6 @@ export type TrayApp = {
     id: string,
     iconSrc: string,
     name: string,
-    action?: TrayAppAction,
+    action: TrayAppAction,
     menu?: TrayAppMenu
 }
