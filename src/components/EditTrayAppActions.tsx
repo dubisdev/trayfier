@@ -50,15 +50,7 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
         onUpdated()
     }
 
-    let actionSrc = ""
-    if (trayApp.action) {
-        if ("path" in trayApp.action.configuration) {
-            actionSrc = trayApp.action.configuration.path
-        }
-        if ("url" in trayApp.action.configuration) {
-            actionSrc = trayApp.action.configuration.url
-        }
-    }
+    let actionSrc = trayApp.action.configuration.path
 
     return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)} autoComplete="off">
         <div className="flex flex-col justify-center items-center">

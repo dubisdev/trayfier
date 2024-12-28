@@ -16,7 +16,7 @@ import { Confirm } from "@/components/ConfirmModal"
 import { open } from "@tauri-apps/plugin-shell"
 
 export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
-    const { name, iconSrc, action: { configuration: { path } } = {} } = app
+    const { name, iconSrc, action: { configuration: { path = "" } = {} } = {} } = app
 
     const [, navigate] = useLocation()
 
@@ -34,9 +34,9 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
             <Icon src={convertFileSrc(iconSrc)} altName={name} />
             <CardTitle className="text-xl">{name}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="overflow-hidden">
             <p>
-                Open: <a className="text-blue-600" onClick={() => open(path)} href="#">{path}</a>
+                Open: <a className="text-blue-600 text-ellipsis whitespace-nowrap" onClick={() => open(path)} href="#">{path}</a>
             </p>
         </CardContent>
         <CardFooter className="gap-4">

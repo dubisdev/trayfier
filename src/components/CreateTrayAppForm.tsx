@@ -32,7 +32,7 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
 
         if (!iconSrc) return
 
-        addTrayApp({ name, iconSrc })
+        addTrayApp({ name, iconSrc, path: iconSrc })
 
         props.onCreated()
     }
