@@ -16,6 +16,6 @@ TrayFier is a simple tool that allows adding custom actions to the Windows Syste
 
 ## Planned Actions
 
-- [ ] Open SRC (image, folder, executable...)
+- [x] Open SRC (image, folder, executable...)
 - [ ] Execute code
 - [ ] System Actions (volume up/down, silence, screen capture, shutdown ...)
