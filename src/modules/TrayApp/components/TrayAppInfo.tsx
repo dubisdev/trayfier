@@ -4,9 +4,18 @@ import { TrayApp } from "../domain/TrayApp"
 import { Icon } from "./Icon"
 import { useLocation } from "wouter"
 import { Routes } from "../../../routes/Routes"
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+
 
 export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
-    const { name, iconSrc } = app
+    const { name, iconSrc, action: { configuration: { path } } = {} } = app
 
     const [, navigate] = useLocation()
 
@@ -18,13 +27,17 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
         deleteTrayApp(app)
     }
 
-    return <div className="flex p-3 justify-between border border-black rounded-md">
-        <Icon src={convertFileSrc(iconSrc)} altName={name} />
-
-        <span>{name}</span>
-
-        <button onClick={openEditForm}>Edit</button>
-
-        <button onClick={handleDeleteTrayApp}>Delete</button>
-    </div>
+    return <Card>
+        <CardHeader>
+            <Icon src={convertFileSrc(iconSrc)} altName={name} />
+            <CardTitle>{name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+            <p>Open: <a href={path}>{path}</a></p>
+        </CardContent>
+        <CardFooter className="gap-4">
+            <Button onClick={openEditForm} className="w-1/2">Edit</Button>
+            <Button onClick={handleDeleteTrayApp} className="w-1/2">Delete</Button>
+        </CardFooter>
+    </Card>
 }

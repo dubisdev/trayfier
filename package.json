@@ -12,6 +12,8 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.2",
+    "@radix-ui/react-slot": "^1.1.1",
     "@tauri-apps/api": "2.1.1",
     "@tauri-apps/plugin-dialog": "latest",
     "@tauri-apps/plugin-fs": "latest",
