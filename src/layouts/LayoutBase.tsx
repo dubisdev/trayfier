@@ -6,7 +6,7 @@ type LayoutBaseProps = PropsWithChildren<{
 }>
 
 export const LayoutBase = ({ children, pageTitle, actionButton }: LayoutBaseProps) => {
-    return <div className="flex flex-col items-center p-5 w-dvw h-dvh">
+    return <div className="flex flex-col items-center p-5 w-dvw h-dvh gap-2">
         <div className="h-12 w-full flex justify-between">
             <h1 className="font-bold text-2xl">{pageTitle}</h1>
             {actionButton}
