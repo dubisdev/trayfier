@@ -4,11 +4,20 @@ import { TrayAppInfo } from "../modules/TrayApp/components/TrayAppInfo";
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { Routes } from "./Routes";
 import { Button } from "@/components/ui/button";
+import { Confirm } from "@/components/ConfirmModal";
 
 export const Home = () => {
     const trayApps = useTrayAppsStore(s => s.trayApps)
 
-    return <LayoutBase pageTitle="Your Apps">
+    return <LayoutBase
+        pageTitle="Your Apps"
+        actionButton={
+            <Button asChild>
+                <Link href={Routes.CREATE_TRAY_APP}>
+                    Create Tray App
+                </Link>
+            </Button>
+        }>
         <ul className="p-0 grid grid-cols-3 gap-2">
             {
                 trayApps.map((trayApp) =>
@@ -18,9 +27,6 @@ export const Home = () => {
                 )
             }
         </ul>
-
-        <Link href={Routes.CREATE_TRAY_APP}>
-            <Button>Create Tray App</Button>
-        </Link>
+        <Confirm.Root />
     </LayoutBase>
 }

@@ -12,7 +12,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-
+import { Confirm } from "@/components/ConfirmModal"
 
 export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
     const { name, iconSrc, action: { configuration: { path } } = {} } = app
@@ -23,8 +23,9 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
 
     const deleteTrayApp = useTrayAppsStore(s => s.deleteTrayApp)
 
-    const handleDeleteTrayApp = () => {
-        deleteTrayApp(app)
+    const handleDeleteTrayApp = async () => {
+        const res = await Confirm.call({ message: `Are you sure you want to delete ${name}?` })
+        if (res) deleteTrayApp(app)
     }
 
     return <Card>
@@ -37,7 +38,7 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
         </CardContent>
         <CardFooter className="gap-4">
             <Button onClick={openEditForm} className="w-1/2">Edit</Button>
-            <Button onClick={handleDeleteTrayApp} className="w-1/2">Delete</Button>
+            <Button variant="ghost" onClick={handleDeleteTrayApp} className="w-1/2">Delete</Button>
         </CardFooter>
     </Card>
 }

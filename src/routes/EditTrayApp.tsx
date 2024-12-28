@@ -3,6 +3,7 @@ import { LayoutBase } from "../layouts/LayoutBase"
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { Routes } from "./Routes";
 import { UpdateTrayAppForm } from "../components/EditTrayAppActions";
+import { Button } from "@/components/ui/button";
 
 export const EditTrayApp = () => {
     const [, navigate] = useLocation()
@@ -14,8 +15,16 @@ export const EditTrayApp = () => {
 
     if (!trayApp) return <Redirect to={Routes.HOME} />
 
-    return <LayoutBase pageTitle={`Edit ${trayApp.name}`}>
+    return <LayoutBase
+        actionButton={
+            <Button asChild>
+                <Link href={Routes.HOME}>
+                    Cancel
+                </Link>
+            </Button>
+        }
+
+        pageTitle={`Edit ${trayApp.name}`}>
         <UpdateTrayAppForm trayApp={trayApp} onUpdated={redirectToHome} />
-        <Link href={Routes.HOME}>Home</Link>
     </LayoutBase>
 }
