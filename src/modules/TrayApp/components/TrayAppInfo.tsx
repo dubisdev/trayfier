@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Confirm } from "@/components/ConfirmModal"
+import { open } from "@tauri-apps/plugin-shell"
 
 export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
     const { name, iconSrc, action: { configuration: { path } } = {} } = app
@@ -34,7 +35,9 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
             <CardTitle className="text-xl">{name}</CardTitle>
         </CardHeader>
         <CardContent>
-            <p>Open: <a href={path}>{path}</a></p>
+            <p>
+                Open: <a className="text-blue-600" onClick={() => open(path)} href="#">{path}</a>
+            </p>
         </CardContent>
         <CardFooter className="gap-4">
             <Button onClick={openEditForm} className="w-1/2">Edit</Button>
