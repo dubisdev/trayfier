@@ -61,15 +61,32 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
     }
 
     return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)} autoComplete="off">
-        <input name="trayAppName" defaultValue={trayApp.name} />
-        <button type="button" onClick={handleSelectImage}>Select App Icon</button>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center"
+        }}>
+            <label>
+                {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
 
-        <label htmlFor="actionType">Open:</label>
-        <input name="actionValue" defaultValue={actionSrc} />
+                <button type="button" onClick={handleSelectImage}>Select App Icon</button>
+            </label>
 
-        {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
+            <label>
+                App Name
+                <input name="trayAppName" defaultValue={trayApp.name} />
+            </label>
 
-        <button type="submit">Update Tray App</button>
+
+            <label htmlFor="actionType">
+                Open Path
+                <input name="actionValue" defaultValue={actionSrc} />
+            </label>
+
+            <button type="submit">Update Tray App</button>
+        </div>
+
 
     </form>
 }
