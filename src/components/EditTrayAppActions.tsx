@@ -61,12 +61,7 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
     }
 
     return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)} autoComplete="off">
-        <div style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center"
-        }}>
+        <div className="flex flex-col justify-center items-center">
             <label>
                 {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
 

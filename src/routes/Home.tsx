@@ -8,10 +8,10 @@ export const Home = () => {
     const trayApps = useTrayAppsStore(s => s.trayApps)
 
     return <LayoutBase pageTitle="Your Apps">
-        <ul style={{ padding: 0 }}>
+        <ul className="p-0 flex flex-col gap-2">
             {
                 trayApps.map((trayApp) =>
-                    <li key={trayApp.id} style={{ listStyle: "none", margin: "10px 0" }}>
+                    <li key={trayApp.id}>
                         <TrayAppInfo app={trayApp} />
                     </li>
                 )

@@ -18,13 +18,7 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
         deleteTrayApp(app)
     }
 
-    return <div style={{
-        display: "flex",
-        padding: "10px",
-        justifyContent: "space-between",
-        border: "1px solid black",
-        borderRadius: "5px",
-    }}>
+    return <div className="flex p-3 justify-between border border-black rounded-md">
         <Icon src={convertFileSrc(iconSrc)} altName={name} />
 
         <span>{name}</span>

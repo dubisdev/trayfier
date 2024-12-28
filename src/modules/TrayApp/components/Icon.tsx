@@ -4,5 +4,5 @@ type IconProps = {
 }
 
 export const Icon = ({ src, altName }: IconProps) => {
-    return <img style={{ objectFit: "contain", borderRadius: "5px" }} src={src} alt={altName} width={30} height={30} />
+    return <img className="object-contain rounded-md w-8 h-8" src={src} alt={altName} />
 }

@@ -5,19 +5,11 @@ type LayoutBaseProps = PropsWithChildren<{
 }>
 
 export const LayoutBase = ({ children, pageTitle }: LayoutBaseProps) => {
-    return <div style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "20px",
-        backgroundColor: "#f0f0f0"
-    }}>
-        <div style={{ height: "50px", width: "100%" }}>
+    return <div className="flex flex-col items-center p-5 w-dvw h-dvh bg-gray-100">
+        <div className="h-12 w-full">
             <h1>{pageTitle}</h1>
         </div>
-        <main style={{ height: "100%", width: "100%" }}>
+        <main className="h-full w-full">
             {children}
         </main>
     </div>
