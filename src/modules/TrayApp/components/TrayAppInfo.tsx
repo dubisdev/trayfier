@@ -28,9 +28,9 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
     }
 
     return <Card>
-        <CardHeader>
+        <CardHeader className="items-center w-full">
             <Icon src={convertFileSrc(iconSrc)} altName={name} />
-            <CardTitle>{name}</CardTitle>
+            <CardTitle className="text-xl">{name}</CardTitle>
         </CardHeader>
         <CardContent>
             <p>Open: <a href={path}>{path}</a></p>
