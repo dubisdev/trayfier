@@ -58,6 +58,7 @@
 }
 @layer base {
   * {
+    overscroll-behavior: none;
     @apply border-border;
   }
   body {
