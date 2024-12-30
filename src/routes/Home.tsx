@@ -18,6 +18,11 @@ export const Home = () => {
                 </Link>
             </Button>
         }>
+        {
+            trayApps.length === 0 && <p className="text-center text-gray-500 mt-8 font-semibold text-lg">
+                Start creating apps by pressing "Create Tray App" 🧙‍♂️
+            </p>
+        }
         <ul className="p-0 grid gird-cols-1 sm:grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
             {
                 trayApps.map((trayApp) =>
