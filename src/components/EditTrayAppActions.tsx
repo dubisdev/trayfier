@@ -1,10 +1,23 @@
-import { FormEvent, useState } from "react";
 import { useTrayAppsStore } from "../stores/useTrayAppsStore";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Icon } from "../modules/TrayApp/components/Icon";
 import { TrayApp } from "../modules/TrayApp/domain/TrayApp";
 import { TrayAppAction, TrayAppActions } from "../modules/TrayAppAction/TrayAppAction";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+
+const EditTrayAppFormSchema = z.object({
+    trayAppName: z.string().nonempty(),
+    trayAppIcon: z.string().nonempty(),
+    trayAppSrc: z.string().nonempty(),
+})
+
+type IEditTrayAppForm = z.infer<typeof EditTrayAppFormSchema>
 
 interface CreateTrayAppFormProps {
     trayApp: TrayApp
@@ -12,68 +25,93 @@ interface CreateTrayAppFormProps {
 }
 
 export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps) => {
-    const updateTrayApp = useTrayAppsStore(s => s.updateTrayApp)
+    const form = useForm<IEditTrayAppForm>({
+        resolver: zodResolver(EditTrayAppFormSchema),
+        defaultValues: {
+            trayAppName: trayApp.name,
+            trayAppIcon: trayApp.iconSrc,
+            trayAppSrc: trayApp.action.configuration.path
+        }
+    })
 
-    const [iconSrc, setIconSrc] = useState<string>(trayApp.iconSrc)
+    const updateTrayApp = useTrayAppsStore(s => s.updateTrayApp)
 
     const handleSelectImage = async () => {
         const filePath = await open({ multiple: false, filters: [{ name: "*", extensions: ["png"] }] })
 
-        if (!filePath) return
+        if (!filePath) return form.setError("trayAppIcon", { message: "Please select an icon" })
 
-        setIconSrc(filePath)
+        form.clearErrors("trayAppIcon")
+        form.setValue("trayAppIcon", filePath)
     }
 
-    const handleCreateTrayApp = async (e: FormEvent, iconSrc: string | null) => {
-        e.preventDefault();
-
-        const fields = new FormData(e.target as HTMLFormElement);
-
-        const name = fields.get("trayAppName");
-        if (!name) return
-        if (typeof name !== "string") return
-
-        const actionValue = fields.get("actionValue");
-        if (typeof actionValue !== "string") return
+    const handleUpdateTrayApp: SubmitHandler<IEditTrayAppForm> = async (data) => {
+        const { trayAppName, trayAppIcon, trayAppSrc } = data
 
         const action: TrayAppAction = {
             type: TrayAppActions.OPEN_PATH,
             configuration: {
-                path: actionValue
+                path: trayAppSrc
             }
         }
 
-        if (!iconSrc) return
-
-        updateTrayApp({ ...trayApp, name, iconSrc, action })
+        updateTrayApp({
+            ...trayApp,
+            name: trayAppName,
+            iconSrc: trayAppIcon,
+            action
+        })
 
         onUpdated()
     }
 
-    let actionSrc = trayApp.action.configuration.path
+    return <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleUpdateTrayApp)} className="space-y-8">
+            <FormField
+                control={form.control}
+                name="trayAppName"
+                render={({ field }) => {
+                    return <FormItem>
+                        <FormLabel>App Name</FormLabel>
+                        <FormControl>
+                            <Input {...field} autoComplete="off" />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
 
-    return <form onSubmit={(e) => handleCreateTrayApp(e, iconSrc)} autoComplete="off">
-        <div className="flex flex-col justify-center items-center">
-            <label>
-                {iconSrc && <Icon src={convertFileSrc(iconSrc)} altName="Selected icon" />}
+                }} />
+            <FormField
+                control={form.control}
+                name="trayAppSrc"
+                render={({ field }) => {
+                    return <FormItem>
+                        <FormLabel>Path/URL</FormLabel>
+                        <FormControl>
+                            <Input {...field} autoComplete="off" />
+                        </FormControl>
+                        <FormDescription>The Path or URL that will be opened when the icon is clicked</FormDescription>
+                        <FormMessage />
+                    </FormItem>
 
-                <button type="button" onClick={handleSelectImage}>Select App Icon</button>
-            </label>
+                }} />
+            {form.watch("trayAppIcon") && <Icon src={convertFileSrc(form.watch("trayAppIcon"))} altName="Selected icon" />}
+            <FormField
+                control={form.control}
+                name="trayAppIcon"
+                render={() => {
+                    return <FormItem className="flex flex-col">
+                        <FormLabel>App Icon</FormLabel>
+                        <FormControl className="w-min">
+                            <Button type="button" onClick={handleSelectImage}>
+                                Select Icon
+                            </Button>
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
 
-            <label>
-                App Name
-                <input name="trayAppName" defaultValue={trayApp.name} />
-            </label>
+                }} />
 
-
-            <label htmlFor="actionType">
-                Open Path
-                <input name="actionValue" defaultValue={actionSrc} />
-            </label>
-
-            <button type="submit">Update Tray App</button>
-        </div>
-
-
-    </form>
+            <Button type="submit">Update Tray App</Button>
+        </form>
+    </Form>
 }
