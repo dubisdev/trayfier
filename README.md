@@ -5,7 +5,7 @@ TrayFier is a simple tool that allows adding custom actions to the Windows Syste
 ## Roadmap
 
 - [x] Add first "Action" -> Open src
-- [ ] Improve UI
+- [x] Improve UI
 - [x] Configure autostart
 - [ ] Add autoupdater
 - [ ] Add CI to create releases & build
