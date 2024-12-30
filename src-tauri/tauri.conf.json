@@ -11,6 +11,7 @@
   "app": {
     "windows": [
       {
+        "visible": false,
         "title": "TrayFier - Supercharge your Windows Tray",
         "width": 1000,
         "minWidth": 500,

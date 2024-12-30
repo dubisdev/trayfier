@@ -25,6 +25,8 @@
     "fs:allow-remove",
     "fs:allow-appconfig-write-recursive",
     "shell:allow-open",
+    "core:window:allow-hide",
+    "core:window:allow-show",
     {
       "identifier": "fs:scope",
       "allow": [
