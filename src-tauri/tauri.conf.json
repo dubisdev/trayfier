@@ -32,7 +32,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQyQjVDN0VFOTlBN0MxRDkKUldUWndhZVo3c2UxUXArNHdRUzJxNFBuRTdQSGZ5U0twMkl0bWtCVTlDaDZwUTVseWpvN3VwZDIK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDVGNzAwRUZERTgyRTc2RTEKUldUaGRpN28vUTV3WDRBTDZrOU1RajR2VXU4SVd0blplalYxcXhjWk95U1M4aG9KZUxoYzkyWE0K",
       "endpoints": [
         "https://github.com/dubisdev/trayfier/releases/latest/download/latest.json"
       ],
