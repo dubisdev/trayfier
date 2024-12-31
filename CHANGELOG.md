@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.1...trayfier-v1.0.2) (2024-12-31)
+
+
+### Bug Fixes
+
+* Update tauri updater key ([7b9e469](https://github.com/dubisdev/trayfier/commit/7b9e46964ecd9b750ae99f1f781e3c4fd4dc02c7))
+
 ## [1.0.1](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.0...trayfier-v1.0.1) (2024-12-31)
 
 
