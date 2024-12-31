@@ -4,8 +4,7 @@ import App from "./App";
 import "./index.css";
 import { createTrayfierTrayIcon } from "./modules/TrayfierTrayIcon/createTrayfierTrayIcon";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
+import { checkForUpdates } from "./modules/Updater/checkForupdates";
 
 // Avoid closing the app when the user clicks the close button (hide)
 getCurrentWindow().onCloseRequested((e) => {
@@ -16,7 +15,9 @@ getCurrentWindow().onCloseRequested((e) => {
 })
 
 createTrayfierTrayIcon()
+checkForUpdates()
 
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <App />

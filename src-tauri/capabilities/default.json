@@ -28,7 +28,11 @@
     "fs:allow-remove",
     "fs:allow-appconfig-write-recursive",
     "process:allow-exit",
+    "process:allow-restart",
     "shell:allow-open",
+    "updater:default",
+    "autostart:default",
+    "dialog:allow-ask",
     {
       "identifier": "fs:scope",
       "allow": [
