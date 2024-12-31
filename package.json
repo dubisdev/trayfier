@@ -22,6 +22,7 @@
     "@tauri-apps/plugin-fs": "latest",
     "@tauri-apps/plugin-process": "2.2.0",
     "@tauri-apps/plugin-shell": "latest",
+    "@tauri-apps/plugin-updater": "2.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.469.0",

@@ -6,6 +6,7 @@
     "linux"
   ],
   "permissions": [
-    "autostart:default"
+    "autostart:default",
+    "updater:default"
   ]
 }

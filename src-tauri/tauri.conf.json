@@ -30,7 +30,19 @@
       }
     }
   },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDE1RkIyQ0Q3M0YxNzU5M0QKUldROVdSYy8xeXo3RlVGSWlseHg4WFZZK094RVhKZGVWYy9RSGlmYlM4UW5odWpKdXNLUkNKUXoK",
+      "endpoints": [
+        "https://github.com/dubisdev/trayfier/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  },
   "bundle": {
+    "createUpdaterArtifacts": true,
     "category": "Productivity",
     "shortDescription": "Supercharge your Windows Tray",
     "publisher": "dubis.dev",
