@@ -39,9 +39,8 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
     const handleSelectImage = async () => {
         const filePath = await open({ multiple: false, filters: [{ name: "*", extensions: ["png"] }] })
 
-        if (!filePath) return form.setError("trayAppIcon", { message: "Please select an icon" })
+        if (!filePath) return
 
-        form.clearErrors("trayAppIcon")
         form.setValue("trayAppIcon", filePath)
     }
 
