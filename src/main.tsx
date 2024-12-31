@@ -8,7 +8,10 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 // Avoid closing the app when the user clicks the close button (hide)
-getCurrentWindow().onCloseRequested(() => {
+getCurrentWindow().onCloseRequested((e) => {
+  // Prevent the window from closing
+  e.preventDefault()
+
   getCurrentWindow().hide()
 })
 

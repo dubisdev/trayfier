@@ -1,18 +1,49 @@
-import { TrayAppVisibilityManager } from "../../di"
-import { TrayAppActions } from "../TrayAppAction/TrayAppAction"
+
+import { TrayIcon } from "@tauri-apps/api/tray";
+import { Menu, MenuItem } from "@tauri-apps/api/menu";
+import { toggleTrayfierWindow } from "./toggleTrayfierwindow";
+import { exit } from "@tauri-apps/plugin-process"
 
 const iconId = "trayfier-icon"
 
-export const createTrayfierTrayIcon = () => {
-    TrayAppVisibilityManager.show({
-        id: iconId,
-        name: "Trayfier",
-        iconSrc: "./icons/icon.png",
-        action: {
-            type: TrayAppActions.OPEN_PATH,
-            configuration: {
-                path: "test"
+const hide = async () => {
+    const tray = await TrayIcon.getById(iconId)
+
+    if (!tray) return
+
+    await tray.setVisible(false)
+    await tray.close()
+}
+
+export const createTrayfierTrayIcon = async () => {
+    const tray = await TrayIcon.getById(iconId)
+
+    if (tray) await hide()
+
+    await TrayIcon.new({
+        icon: "./icons/icon.png",
+        tooltip: "Trayfier",
+        action: async (event) => {
+            if (event.type === "Click" && event.buttonState === "Up") {
+                await toggleTrayfierWindow()
             }
-        }
+        },
+        id: iconId,
+        menu: await Menu.new({
+            items: [
+                await MenuItem.new({
+                    text: "Show/Hide Trayfier",
+                    action: async () => {
+                        await toggleTrayfierWindow()
+                    }
+                }),
+                await MenuItem.new({
+                    text: "Quit",
+                    action: async () => {
+                        await exit(0)
+                    }
+                })
+            ]
+        })
     })
 }
