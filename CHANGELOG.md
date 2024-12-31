@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.2...trayfier-v1.0.3) (2024-12-31)
+
+
+### Bug Fixes
+
+* Tray app icon not working ([44ae09c](https://github.com/dubisdev/trayfier/commit/44ae09c22b82cfa6e191d3a42dc1eefdf958bba3))
+
 ## [1.0.2](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.1...trayfier-v1.0.2) (2024-12-31)
 
 
