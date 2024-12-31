@@ -31,6 +31,9 @@
 
 <hr />
 
+<p align="center">
+  <img src="./assets/animation.gif" alt="TrayFier Screenshot" width="1000" />
+
 <!-- # Features 🧙‍♂️
 
 TrayFier is a simple tool that allows adding custom actions to the Windows Tray.
