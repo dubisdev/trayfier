@@ -45,6 +45,11 @@
     "resources": [
       "icons/icon.png"
     ],
+    "windows": {
+      "nsis": {
+        "installerIcon": "icons/icon.ico"
+      }
+    },
     "createUpdaterArtifacts": true,
     "category": "Productivity",
     "shortDescription": "Supercharge your Windows Tray",
