@@ -3,6 +3,7 @@ import { TrayIcon } from "@tauri-apps/api/tray";
 import { Menu, MenuItem } from "@tauri-apps/api/menu";
 import { toggleTrayfierWindow } from "./toggleTrayfierWindow";
 import { exit } from "@tauri-apps/plugin-process"
+import { resolveResource } from '@tauri-apps/api/path'
 
 const iconId = "trayfier-icon"
 
@@ -21,7 +22,7 @@ export const createTrayfierTrayIcon = async () => {
     if (tray) await hide()
 
     await TrayIcon.new({
-        icon: "./icons/icon.png",
+        icon: await resolveResource("icons/icon.png"),
         tooltip: "Trayfier",
         action: async (event) => {
             if (event.type === "Click" && event.buttonState === "Up") {

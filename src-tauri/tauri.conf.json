@@ -42,6 +42,9 @@
     }
   },
   "bundle": {
+    "resources": [
+      "icons/icon.png"
+    ],
     "createUpdaterArtifacts": true,
     "category": "Productivity",
     "shortDescription": "Supercharge your Windows Tray",
