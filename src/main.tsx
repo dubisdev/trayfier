@@ -4,7 +4,7 @@ import App from "./App";
 import "./index.css";
 import { createTrayfierTrayIcon } from "./modules/TrayfierTrayIcon/createTrayfierTrayIcon";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { checkForUpdates } from "./modules/Updater/checkForupdates";
+import { checkForUpdates } from "./modules/Updater/checkForUpdates";
 
 // Avoid closing the app when the user clicks the close button (hide)
 getCurrentWindow().onCloseRequested((e) => {
