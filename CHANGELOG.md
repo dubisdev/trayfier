@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.3...trayfier-v1.0.4) (2024-12-31)
+
+
+### Bug Fixes
+
+* Force update to test updater ([278a25c](https://github.com/dubisdev/trayfier/commit/278a25cd30db1d7b5461fc7a2700798dc7ae679d))
+
 ## [1.0.3](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.2...trayfier-v1.0.3) (2024-12-31)
 
 
