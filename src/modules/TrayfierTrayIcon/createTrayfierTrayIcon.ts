@@ -1,7 +1,7 @@
 
 import { TrayIcon } from "@tauri-apps/api/tray";
 import { Menu, MenuItem } from "@tauri-apps/api/menu";
-import { toggleTrayfierWindow } from "./toggleTrayfierwindow";
+import { toggleTrayfierWindow } from "./toggleTrayfierWindow";
 import { exit } from "@tauri-apps/plugin-process"
 
 const iconId = "trayfier-icon"
