@@ -13,7 +13,7 @@ Things to be done before the first release.
 - [x] Configure autostart
 - [ ] Add autoupdater
 - [x] Add CI to create releases & build
-- [ ] Add App Tray Icon - Toggle App
+- [x] Add App Tray Icon - Toggle App + exit
 - [ ] Improve ICON
 - [ ] Improve README
 
