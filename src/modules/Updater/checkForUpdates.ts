@@ -8,7 +8,7 @@ export const checkForUpdates = async () => {
     if (!update?.available) return;
 
     const response = await ask("Would you like to install it now?", {
-        title: "New RunMath version available (v" + update.version + ")",
+        title: "New TrayFier version available (v" + update.version + ")",
         kind: "info"
     })
 
