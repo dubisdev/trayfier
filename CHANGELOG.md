@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.0...trayfier-v1.0.1) (2024-12-31)
+
+
+### Bug Fixes
+
+* Add installer icon ([0857fb2](https://github.com/dubisdev/trayfier/commit/0857fb20e6c09bf61d8682b79f24bdd9379d9e66))
+
 ## 1.0.0 (2024-12-31)
 
 
