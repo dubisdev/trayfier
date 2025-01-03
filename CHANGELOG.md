@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.2...trayfier-v1.0.3) (2025-01-03)
+
+
+### Bug Fixes
+
+* Remove unneccessary shortcuts ([2bfc0d1](https://github.com/dubisdev/trayfier/commit/2bfc0d12f79e8330c3cf2c12b7aa9f15c0cda28b))
+
 ## [1.0.2](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.1...trayfier-v1.0.2) (2024-12-31)
 
 
