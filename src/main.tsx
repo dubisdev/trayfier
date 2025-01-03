@@ -28,7 +28,9 @@ window.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.code === "KeyU") e.preventDefault()
   if (e.ctrlKey && e.code === "KeyP") e.preventDefault()
   if (e.ctrlKey && e.code === "KeyG") e.preventDefault()
-  if (e.ctrlKey && e.code === "F5") e.preventDefault()
+  if (e.code === "F3") e.preventDefault()
+  if (e.code === "F5") e.preventDefault()
+  if (e.code === "F7") e.preventDefault()
 })
 
 
