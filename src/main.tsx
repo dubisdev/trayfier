@@ -17,6 +17,21 @@ getCurrentWindow().onCloseRequested((e) => {
 createTrayfierTrayIcon()
 checkForUpdates()
 
+// Disable context menu
+window.addEventListener("contextmenu", (e) => { e.preventDefault() })
+
+// Disable "non-native" shortcuts
+window.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.code === "KeyR") e.preventDefault()
+  if (e.ctrlKey && e.code === "KeyJ") e.preventDefault()
+  if (e.ctrlKey && e.code === "KeyF") e.preventDefault()
+  if (e.ctrlKey && e.code === "KeyU") e.preventDefault()
+  if (e.ctrlKey && e.code === "KeyP") e.preventDefault()
+  if (e.ctrlKey && e.code === "KeyG") e.preventDefault()
+  if (e.ctrlKey && e.code === "F5") e.preventDefault()
+})
+
+
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
