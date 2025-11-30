@@ -34,7 +34,6 @@
     "react-call": "1.8.1",
     "react-dom": "19.2.0",
     "react-hook-form": "7.67.0",
-    "recharts": "2.15.4",
     "tailwind-merge": "3.4.0",
     "wouter": "3.8.0",
     "zod": "4.1.13",
