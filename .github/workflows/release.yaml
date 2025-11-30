@@ -25,6 +25,9 @@ jobs:
 
       - name: Run typecheck
         run: pnpm tsc
+      
+      - name: Run linter
+        run: pnpm lint
 
   release-please:
     runs-on: ubuntu-latest
