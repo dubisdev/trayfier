@@ -17,7 +17,7 @@ export const EditTrayApp = () => {
 
     return <LayoutBase
         actionButton={
-            <Button asChild>
+            <Button>
                 <Link href={Routes.HOME}>
                     Cancel
                 </Link>

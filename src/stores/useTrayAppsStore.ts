@@ -4,11 +4,11 @@ import { TrayApp } from "../modules/TrayApp/domain/TrayApp";
 import { showTrayApp } from "../modules/TrayApp/application/showTrayApp";
 import { hideTrayApp } from "../modules/TrayApp/application/hideTrayApp";
 import { TrayAppVisibilityManager } from "../di";
-import { TrayAppActions } from "@/modules/TrayAppAction/TrayAppAction";
+import { TrayAppAction } from "@/modules/TrayAppAction/TrayAppAction";
 
 type TrayAppStore = {
     trayApps: TrayApp[];
-    addTrayApp: (trayAppPrimitives: { name: string, iconSrc: string, path: string }) => void;
+    addTrayApp: (trayAppPrimitives: { name: string, iconSrc: string, actionInfo: TrayAppAction }) => void;
     deleteTrayApp: (trayAppId: TrayApp) => void;
     updateTrayApp: (trayApp: TrayApp) => void;
     getById: (trayAppId: string) => TrayApp | undefined;
@@ -24,14 +24,11 @@ export const useTrayAppsStore = create<TrayAppStore>()(
             },
 
             addTrayApp: (trayInfo) => {
-                const { iconSrc, name, path } = trayInfo
+                const { iconSrc, name, actionInfo } = trayInfo
                 const trayApp: TrayApp = {
                     iconSrc,
                     name,
-                    action: {
-                        type: TrayAppActions.OPEN_PATH,
-                        configuration: { path }
-                    },
+                    action: actionInfo,
                     id: crypto.randomUUID()
                 }
 

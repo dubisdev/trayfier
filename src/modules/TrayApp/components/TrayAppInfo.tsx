@@ -14,9 +14,10 @@ import {
 import { Button } from "@/components/ui/button"
 import { Confirm } from "@/components/ConfirmModal"
 import { open } from "@tauri-apps/plugin-shell"
+import { TrayAppActions } from "@/modules/TrayAppAction/TrayAppAction"
 
 export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
-    const { name, iconSrc, action: { configuration: { path = "" } = {} } = {} } = app
+    const { name, iconSrc, action } = app
 
     const [, navigate] = useLocation()
 
@@ -35,9 +36,18 @@ export const TrayAppInfo = ({ app }: { app: TrayApp }) => {
             <CardTitle className="text-xl">{name}</CardTitle>
         </CardHeader>
         <CardContent className="overflow-hidden">
-            <p>
-                Open: <a className="text-blue-600 text-ellipsis whitespace-nowrap" onClick={() => open(path)} href="#">{path}</a>
-            </p>
+            {
+                action.type === TrayAppActions.OPEN_PATH && <p>
+                    Open: <a
+                        className="text-blue-600 text-ellipsis whitespace-nowrap"
+                        onClick={() => open(action.configuration.path)}
+                        href="#">
+                        {action.configuration.path}
+                    </a>
+                </p>
+            }
+            {action.type === TrayAppActions.CODE && <p>Code Action</p>}
+
         </CardContent>
         <CardFooter className="gap-4">
             <Button onClick={openEditForm} className="w-1/2">Edit</Button>

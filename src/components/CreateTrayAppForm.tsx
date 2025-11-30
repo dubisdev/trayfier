@@ -8,12 +8,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { TrayAppActions } from "@/modules/TrayAppAction/TrayAppAction";
 
-const CreateTrayAppFormSchema = z.object({
-    trayAppName: z.string().nonempty(),
-    trayAppIcon: z.string().nonempty(),
-    trayAppSrc: z.string().nonempty(),
-})
+const CreateTrayAppFormSchema = z.union([
+    z.object({
+        trayAppName: z.string().trim().nonempty(),
+        trayAppIcon: z.string().trim().nonempty(),
+        trayAppType: z.literal(TrayAppActions.CODE),
+        trayAppCode: z.string().trim().nonempty(),
+    }),
+    z.object({
+        trayAppName: z.string().trim().nonempty(),
+        trayAppIcon: z.string().trim().nonempty(),
+        trayAppType: z.literal(TrayAppActions.OPEN_PATH),
+        trayAppSrc: z.string().trim().nonempty(),
+    })
+])
 
 type ICreateTrayAppForm = z.infer<typeof CreateTrayAppFormSchema>
 
@@ -23,7 +34,13 @@ interface CreateTrayAppFormProps {
 
 export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
     const form = useForm<ICreateTrayAppForm>({
-        resolver: zodResolver(CreateTrayAppFormSchema)
+        resolver: zodResolver(CreateTrayAppFormSchema),
+        defaultValues: {
+            trayAppName: "",
+            trayAppIcon: "",
+            trayAppType: TrayAppActions.OPEN_PATH,
+            trayAppSrc: ""
+        }
     })
     const addTrayApp = useTrayAppsStore(s => s.addTrayApp)
 
@@ -38,13 +55,41 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
     }
 
     const handleCreateTrayApp: SubmitHandler<ICreateTrayAppForm> = async (data) => {
-        const { trayAppName, trayAppIcon, trayAppSrc } = data
+        const { trayAppName, trayAppIcon, trayAppType } = data
 
-        addTrayApp({
-            name: trayAppName,
-            iconSrc: trayAppIcon,
-            path: trayAppSrc
-        })
+        switch (trayAppType) {
+            case TrayAppActions.CODE: {
+                const { trayAppCode } = data
+                addTrayApp({
+                    name: trayAppName,
+                    iconSrc: trayAppIcon,
+                    actionInfo: {
+                        type: TrayAppActions.CODE,
+                        configuration: {
+                            code: trayAppCode
+                        }
+                    }
+                })
+                break
+            }
+
+            case TrayAppActions.OPEN_PATH: {
+                const { trayAppSrc } = data
+
+                addTrayApp({
+                    name: trayAppName,
+                    iconSrc: trayAppIcon,
+                    actionInfo: {
+                        type: TrayAppActions.OPEN_PATH,
+                        configuration: {
+                            path: trayAppSrc
+                        }
+                    }
+                })
+
+                break
+            }
+        }
 
         props.onCreated()
     }
@@ -64,21 +109,8 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
                     </FormItem>
 
                 }} />
-            <FormField
-                control={form.control}
-                name="trayAppSrc"
-                render={({ field }) => {
-                    return <FormItem>
-                        <FormLabel>Path/URL</FormLabel>
-                        <FormControl>
-                            <Input {...field} autoComplete="off" />
-                        </FormControl>
-                        <FormDescription>The Path or URL that will be opened when the icon is clicked</FormDescription>
-                        <FormMessage />
-                    </FormItem>
-
-                }} />
             {form.watch("trayAppIcon") && <Icon src={convertFileSrc(form.watch("trayAppIcon"))} altName="Selected icon" />}
+
             <FormField
                 control={form.control}
                 name="trayAppIcon"
@@ -94,6 +126,50 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
                     </FormItem>
 
                 }} />
+
+            <Tabs defaultValue={TrayAppActions.OPEN_PATH} onValueChange={v => {
+                form.setValue("trayAppType", v as TrayAppActions)
+            }}>
+                <TabsList>
+                    <h3 className="p-2 text-sm">App type</h3>
+                    <TabsTrigger value={TrayAppActions.OPEN_PATH}>Path</TabsTrigger>
+                    <TabsTrigger value={TrayAppActions.CODE}>Code</TabsTrigger>
+                </TabsList>
+                <TabsContent value={TrayAppActions.OPEN_PATH}>
+                    <FormField
+                        control={form.control}
+                        name="trayAppSrc"
+                        render={({ field }) => {
+                            return <FormItem>
+                                <FormLabel>Path/URL</FormLabel>
+                                <FormControl>
+                                    <Input {...field} autoComplete="off" />
+                                </FormControl>
+                                <FormDescription>The Path or URL that will be opened when the icon is clicked</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        }} />
+                </TabsContent>
+                <TabsContent value={TrayAppActions.CODE}>
+                    <FormField
+                        control={form.control}
+                        name="trayAppCode"
+                        render={({ field }) => {
+                            return <FormItem>
+                                <FormLabel>Code</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="console.log('hello world')"
+                                        autoComplete="off"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>JavaScript code that will be executed when the icon is clicked.</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        }} />
+                </TabsContent>
+            </Tabs>
 
             <Button type="submit">Add Tray App</Button>
         </form>

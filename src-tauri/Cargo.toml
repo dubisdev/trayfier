@@ -2,25 +2,24 @@
 name = "TrayFier"
 version = "0.0.0"
 description = "Supercharge your Windows Tray"
-authors = ["you"]
+authors = ["David Jimenez"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "2", features = [] }
+tauri-build = { version = "2.5.3", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = ["protocol-asset", "tray-icon", "image-png", "image-ico"] }
+tauri = { version = "2.9.4", features = ["protocol-asset", "tray-icon", "image-png", "image-ico"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tauri-plugin-dialog = "2"
-tauri-plugin-fs = "2"
-tauri-plugin-shell = "2"
-tauri-plugin-process = "2"
+tauri-plugin-dialog = "2.4.2"
+tauri-plugin-fs = "2.4.4"
+tauri-plugin-shell = "2.3.3"
+tauri-plugin-process = "2.3.1"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
-tauri-plugin-autostart = "2"
-tauri-plugin-single-instance = "2"
-tauri-plugin-updater = "2"
-
+tauri-plugin-autostart = "2.5.1"
+tauri-plugin-single-instance = "2.3.6"
+tauri-plugin-updater = "2.9.0"

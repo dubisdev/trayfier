@@ -12,7 +12,7 @@ export const Home = () => {
     return <LayoutBase
         pageTitle="Your Apps"
         actionButton={
-            <Button asChild>
+            <Button>
                 <Link href={Routes.CREATE_TRAY_APP}>
                     Create Tray App
                 </Link>
