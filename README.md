@@ -16,8 +16,7 @@
   <a href="https://github.com/dubisdev/trayfier/releases/latest">
     🔗 Go to Download Page
   </a>
-    &nbsp; | &nbsp; Give it a Star ⭐ | &nbsp;
-    <a href="https://www.buymeacoffee.com/dubisdev">Support the project 🤝</a>
+    &nbsp; | &nbsp; Give it a Star ⭐
 </p>
 
 <p align="center">
@@ -68,3 +67,4 @@ It only uses the internet to check for updates and download them if you allow it
 ## ⚖️ License
 
 [MIT](./LICENSE.md) © [David Jimenez](https://dubis.dev)
+
