@@ -15,10 +15,11 @@ jobs:
         with:
           node-version: 24
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: 10
+          cache: true
 
       - name: Install app dependencies
         run: pnpm i
@@ -37,7 +38,7 @@ jobs:
       new_release: ${{ steps.release.outputs.release_created }}
 
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release
   
   build-executable:
@@ -54,10 +55,11 @@ jobs:
         with:
           node-version: 24
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: 10
+          cache: true
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -71,7 +73,7 @@ jobs:
 
       - name: get latest release id
         id: latest_release_id
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const { data } = await github.rest.repos.getLatestRelease({ 
