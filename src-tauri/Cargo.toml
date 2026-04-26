@@ -8,18 +8,18 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "2.5.3", features = [] }
+tauri-build = { version = "2.5.6", features = [] }
 
 [dependencies]
-tauri = { version = "2.9.4", features = ["protocol-asset", "tray-icon", "image-png", "image-ico"] }
+tauri = { version = "2.10.3", features = ["protocol-asset", "tray-icon", "image-png", "image-ico"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tauri-plugin-dialog = "2.4.2"
-tauri-plugin-fs = "2.4.4"
-tauri-plugin-shell = "2.3.3"
+tauri-plugin-dialog = "2.7.0"
+tauri-plugin-fs = "2.5.0"
+tauri-plugin-shell = "2.3.5"
 tauri-plugin-process = "2.3.1"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-autostart = "2.5.1"
-tauri-plugin-single-instance = "2.3.6"
-tauri-plugin-updater = "2.9.0"
+tauri-plugin-single-instance = "2.4.1"
+tauri-plugin-updater = "2.10.1"
