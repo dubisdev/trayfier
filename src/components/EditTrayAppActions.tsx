@@ -10,6 +10,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 const EditTrayAppFormSchema = z.union([
   z.object({
@@ -151,7 +152,7 @@ export const UpdateTrayAppForm = ({ trayApp, onUpdated }: CreateTrayAppFormProps
                 <FormItem>
                   <FormLabel>Code</FormLabel>
                   <FormControl>
-                    <Input {...field} autoComplete="off" />
+                    <Textarea {...field} autoComplete="off" />
                   </FormControl>
                   <FormDescription>The code that will be executed when the icon is clicked</FormDescription>
                   <FormMessage />

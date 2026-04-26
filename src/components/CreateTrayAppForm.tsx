@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { TrayAppActions } from "@/modules/TrayAppAction/TrayAppAction";
@@ -169,7 +170,7 @@ export const CreateTrayAppForm = (props: CreateTrayAppFormProps) => {
                   <FormItem>
                     <FormLabel>Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="console.log('hello world')" autoComplete="off" {...field} />
+                      <Textarea placeholder="console.log('hello world')" autoComplete="off" {...field} />
                     </FormControl>
                     <FormDescription>JavaScript code that will be executed when the icon is clicked.</FormDescription>
                     <FormMessage />
