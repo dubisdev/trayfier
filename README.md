@@ -66,5 +66,4 @@ It only uses the internet to check for updates and download them if you allow it
 
 ## ⚖️ License
 
-[MIT](./LICENSE.md) © [David Jimenez](https://dubis.dev)
-
+[MIT](./LICENSE) © [David Jimenez](https://dubis.dev)
