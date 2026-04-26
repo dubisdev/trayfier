@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"typescript.tsdk": "node_modules\\typescript\\lib",
+		"js/ts.tsdk.path": "node_modules\\typescript\\lib",
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "oxc.oxc-vscode",
 		"[typescript]": {
@@ -14,7 +14,6 @@
 		"[typescriptreact]": {
 			"editor.defaultFormatter": "oxc.oxc-vscode"
 		},
-		"oxc.fmt.experimental": true,
 	},
 	"extensions": {
 		"recommendations": [
