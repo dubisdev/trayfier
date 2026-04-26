@@ -6,51 +6,51 @@ import { Menu, MenuItem, Submenu } from "@tauri-apps/api/menu";
 import { TauriTrayAppActionExecutor } from "../../TrayAppAction/infrastructure/TauriTrayAppActionExecutor";
 
 export class TauriTrayAppVisibilityManager implements TrayAppVisibilityManager {
-    async show(trayApp: TrayApp) {
-        const tray = await TrayIcon.getById(trayApp.id)
+  async show(trayApp: TrayApp) {
+    const tray = await TrayIcon.getById(trayApp.id);
 
-        if (tray) await this.hide(trayApp)
+    if (tray) await this.hide(trayApp);
 
-        const menuItems = (trayApp.menu?.menu || []).map(menuItem => this.mapMenuToTauriMenu(menuItem))
+    const menuItems = (trayApp.menu?.menu || []).map((menuItem) => this.mapMenuToTauriMenu(menuItem));
 
-        const menuItemsResolved = await Promise.all(menuItems)
+    const menuItemsResolved = await Promise.all(menuItems);
 
-        await TrayIcon.new({
-            icon: trayApp.iconSrc,
-            tooltip: trayApp.name,
-            action: (event) => {
-                if (event.type === "Click" && event.buttonState === "Up") {
-                    trayApp.action && TauriTrayAppActionExecutor.execute(trayApp.action)
-                }
-            },
-            id: trayApp.id,
-            menu: trayApp.menu && await Menu.new({ items: menuItemsResolved })
-        })
-    }
-
-    async hide(trayApp: TrayApp) {
-        const tray = await TrayIcon.getById(trayApp.id)
-
-        if (!tray) return
-
-        await tray.setVisible(false)
-        await tray.close()
-    }
-
-    private async mapMenuToTauriMenu(menuItem: TrayAppMenuItem) {
-        if (!menuItem.menu || menuItem.menu.length === 0) {
-            return await MenuItem.new({
-                text: menuItem.label,
-                action: () => TauriTrayAppActionExecutor.execute(menuItem.action)
-            })
+    await TrayIcon.new({
+      icon: trayApp.iconSrc,
+      tooltip: trayApp.name,
+      action: (event) => {
+        if (event.type === "Click" && event.buttonState === "Up") {
+          trayApp.action && TauriTrayAppActionExecutor.execute(trayApp.action);
         }
+      },
+      id: trayApp.id,
+      menu: trayApp.menu && (await Menu.new({ items: menuItemsResolved })),
+    });
+  }
 
-        const itemsPromises = menuItem.menu.map(subItem => this.mapMenuToTauriMenu(subItem))
+  async hide(trayApp: TrayApp) {
+    const tray = await TrayIcon.getById(trayApp.id);
 
-        const items = await Promise.all(itemsPromises)
+    if (!tray) return;
 
-        const submenu = await Submenu.new({ text: menuItem.label, items })
+    await tray.setVisible(false);
+    await tray.close();
+  }
 
-        return submenu
+  private async mapMenuToTauriMenu(menuItem: TrayAppMenuItem) {
+    if (!menuItem.menu || menuItem.menu.length === 0) {
+      return await MenuItem.new({
+        text: menuItem.label,
+        action: () => TauriTrayAppActionExecutor.execute(menuItem.action),
+      });
     }
+
+    const itemsPromises = menuItem.menu.map((subItem) => this.mapMenuToTauriMenu(subItem));
+
+    const items = await Promise.all(itemsPromises);
+
+    const submenu = await Submenu.new({ text: menuItem.label, items });
+
+    return submenu;
+  }
 }

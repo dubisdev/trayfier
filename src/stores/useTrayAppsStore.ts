@@ -7,64 +7,64 @@ import { TrayAppVisibilityManager } from "../di";
 import { TrayAppAction } from "@/modules/TrayAppAction/TrayAppAction";
 
 type TrayAppStore = {
-    trayApps: TrayApp[];
-    addTrayApp: (trayAppPrimitives: { name: string, iconSrc: string, actionInfo: TrayAppAction }) => void;
-    deleteTrayApp: (trayAppId: TrayApp) => void;
-    updateTrayApp: (trayApp: TrayApp) => void;
-    getById: (trayAppId: string) => TrayApp | undefined;
-}
+  trayApps: TrayApp[];
+  addTrayApp: (trayAppPrimitives: { name: string; iconSrc: string; actionInfo: TrayAppAction }) => void;
+  deleteTrayApp: (trayAppId: TrayApp) => void;
+  updateTrayApp: (trayApp: TrayApp) => void;
+  getById: (trayAppId: string) => TrayApp | undefined;
+};
 
 export const useTrayAppsStore = create<TrayAppStore>()(
-    persist<TrayAppStore>(
-        (set, get) => ({
-            trayApps: [],
+  persist<TrayAppStore>(
+    (set, get) => ({
+      trayApps: [],
 
-            getById: (trayAppId) => {
-                return get().trayApps.find(app => app.id === trayAppId)
-            },
+      getById: (trayAppId) => {
+        return get().trayApps.find((app) => app.id === trayAppId);
+      },
 
-            addTrayApp: (trayInfo) => {
-                const { iconSrc, name, actionInfo } = trayInfo
-                const trayApp: TrayApp = {
-                    iconSrc,
-                    name,
-                    action: actionInfo,
-                    id: crypto.randomUUID()
-                }
+      addTrayApp: (trayInfo) => {
+        const { iconSrc, name, actionInfo } = trayInfo;
+        const trayApp: TrayApp = {
+          iconSrc,
+          name,
+          action: actionInfo,
+          id: crypto.randomUUID(),
+        };
 
-                set((state) => ({ trayApps: [...state.trayApps, trayApp] }))
+        set((state) => ({ trayApps: [...state.trayApps, trayApp] }));
 
-                showTrayApp(trayApp, TrayAppVisibilityManager)
-            },
+        showTrayApp(trayApp, TrayAppVisibilityManager);
+      },
 
-            deleteTrayApp: async (trayApp: TrayApp) => {
-                set((state) => ({ trayApps: state.trayApps.filter(app => app !== trayApp) }))
+      deleteTrayApp: async (trayApp: TrayApp) => {
+        set((state) => ({ trayApps: state.trayApps.filter((app) => app !== trayApp) }));
 
-                await hideTrayApp(trayApp, TrayAppVisibilityManager)
-            },
+        await hideTrayApp(trayApp, TrayAppVisibilityManager);
+      },
 
-            updateTrayApp: async (trayApp: TrayApp) => {
-                set((state) => ({
-                    trayApps: state.trayApps.map(app => {
-                        if (app.id === trayApp.id) return trayApp
+      updateTrayApp: async (trayApp: TrayApp) => {
+        set((state) => ({
+          trayApps: state.trayApps.map((app) => {
+            if (app.id === trayApp.id) return trayApp;
 
-                        return app
-                    })
-                }))
+            return app;
+          }),
+        }));
 
-                await hideTrayApp(trayApp, TrayAppVisibilityManager)
-                await showTrayApp(trayApp, TrayAppVisibilityManager)
-            }
-        }
-        ), {
-        name: "tray-apps",
-        onRehydrateStorage: () => (state) => {
-            if (!state) return
+        await hideTrayApp(trayApp, TrayAppVisibilityManager);
+        await showTrayApp(trayApp, TrayAppVisibilityManager);
+      },
+    }),
+    {
+      name: "tray-apps",
+      onRehydrateStorage: () => (state) => {
+        if (!state) return;
 
-            state.trayApps.forEach((app) => {
-                showTrayApp(app, TrayAppVisibilityManager)
-            })
-        }
-    }
-    )
+        state.trayApps.forEach((app) => {
+          showTrayApp(app, TrayAppVisibilityManager);
+        });
+      },
+    },
+  ),
 );

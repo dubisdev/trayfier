@@ -1,5 +1,5 @@
 import { TauriTrayAppVisibilityManager } from "./modules/TrayApp/infrastructure/TauriTrayAppDisplayer";
 
-const tauriTrayAppVisibilityManager = new TauriTrayAppVisibilityManager()
+const tauriTrayAppVisibilityManager = new TauriTrayAppVisibilityManager();
 
-export { tauriTrayAppVisibilityManager as TrayAppVisibilityManager }
+export { tauriTrayAppVisibilityManager as TrayAppVisibilityManager };
