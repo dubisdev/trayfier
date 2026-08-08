@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.4...trayfier-v1.0.5) (2026-08-08)
+
+
+### Bug Fixes
+
+* **security:** Update dependencies ([d0ccd4f](https://github.com/dubisdev/trayfier/commit/d0ccd4fb4bc433336fcb5bac27aec9071451cc47))
+
 ## [1.0.4](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.3...trayfier-v1.0.4) (2026-04-26)
 
 
