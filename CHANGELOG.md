@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.3...trayfier-v1.0.4) (2026-04-26)
+
+
+### Bug Fixes
+
+* Update deps ([dbfe35c](https://github.com/dubisdev/trayfier/commit/dbfe35c7d44df27af2bb971f4f09ef072f9223a1))
+* Use textarea for code input ([18cce0f](https://github.com/dubisdev/trayfier/commit/18cce0fea517c4d6c68dd282e493fcb5ef98c813))
+
 ## [1.0.3](https://github.com/dubisdev/trayfier/compare/trayfier-v1.0.2...trayfier-v1.0.3) (2025-01-03)
 
 
